@@ -12,4 +12,4 @@ render-start:
 	gunicorn -w 5 -b 0.0.0.0:$(PORT) page_analyzer:app
 
 install:
-	uv sync
+	$HOME/.local/bin/uv sync
