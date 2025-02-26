@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Детали</title>
+    </head>
+    <body>
+        <form action="{{ url_for('check_url', id=url)}}">
+            <input type="text" name="sex" value="{{ url }}">
+            <button type="submit">Проверить</button>
+        </form>
+    </body>
+</html>

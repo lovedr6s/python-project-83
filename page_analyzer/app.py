@@ -1,15 +1,11 @@
 from dotenv import load_dotenv
 from flask import Flask, render_template, redirect, url_for, request, flash
+from database import *
 from urllib.parse import urlparse
-import datetime
 import validators
-import psycopg2
 import os
 
 load_dotenv()
-
-DATABASE_URL = os.getenv('DATABASE_URL')
-conn = psycopg2.connect(DATABASE_URL)
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
@@ -28,35 +24,35 @@ def add_url():
     
     parsed_url = urlparse(url)
     normalized_url = f"{parsed_url.scheme}://{parsed_url.netloc}"
-    with conn.cursor() as curs:
 
-        curs.execute('SELECT id FROM urls WHERE name = %s', (normalized_url,))
-        existing_url = curs.fetchone()
-        if existing_url:
-            flash("Такой url уже существует")
-            return redirect(url_for('index', url_id=existing_url[0]))
-        
-        curs.execute('INSERT INTO urls (name, created_at) VALUES (%s, %s) RETURNING id', (normalized_url, datetime.datetime.now()))
-        url_id = curs.fetchone()[0]
-        conn.commit()
-        flash("URL добавлен")
-        return redirect(url_for("show_url", id=url_id))
+    existing_url = get_id_by_name(normalized_url)
+    if existing_url:
+        flash("Такой url уже существует")
+        return redirect(url_for('show_url', id=existing_url[0]))
+    
+    url_id = insert_data_into_urls(normalized_url)
+    conn.commit()
+    flash("URL добавлен")
+    return redirect(url_for("show_url", id=url_id))
 
 @app.route("/urls")
 def show_urls():
-    with conn.cursor() as curs:
-        curs.execute("SELECT * FROM urls ORDER BY id")
-        urls = curs.fetchall()
-        return render_template('urls.html', urls=urls)
+    urls = get_all_urls()
+    return render_template('urls.html', urls=urls)
 
-@app.get('/urls/<id>')
+@app.get('/urls/<int:id>')
 def show_url(id):
-    with conn.cursor() as curs:
-        curs.execute("SELECT * FROM urls WHERE id = %s", (id, ))
-        url_data = curs.fetchone()
-        return render_template('url.html', url=url_data)
+    url_data = get_url_by_id(id)
+    return render_template('url_detaly.html', url=url_data[1])
 
-        
+
+@app.post('/urls/<int:id>/checks')
+def check_url(id):
+    with conn.cursor() as curs:
+        curs.execute("INSERT INTO url_checks (created_at) VALUES (%s)", (datetime.datetime.now()))
+
+    return redirect(url_for('show_url', id=id))
+    
    
 
 if __name__ == "__main__":
