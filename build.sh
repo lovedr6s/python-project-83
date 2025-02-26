@@ -4,7 +4,7 @@
 curl -LsSf https://astral.sh/uv/install.sh | sh
 
 # Добавляем uv в PATH
-source $HOME/.local/bin/env
+export PATH="$HOME/.local/bin:$PATH"
 
 # Создаем виртуальное окружение
 uv venv .venv
