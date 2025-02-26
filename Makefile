@@ -9,7 +9,7 @@ build:
 	./build.sh
 
 render-start:
-	.venv/bin/gunicorn gunicorn -w 5 -b 0.0.0.0:$(PORT) page_analyzer:app
+	.local/bin/envgunicorn gunicorn -w 5 -b 0.0.0.0:$(PORT) page_analyzer:app
 
 install:
 	uv sync
