@@ -15,6 +15,22 @@ header a {
     font-size: 20px;
 }
 
+.flash {
+    background-color: silver;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color:rgba(255, 0, 0, 0.7);
+    position: absolute;
+    top: 50px;
+    width: 100%;
+}
+
+.flash p {
+    
+    margin: 10px;
+}
+
 header {
     display: flex;
     align-items: center;
@@ -69,4 +85,19 @@ td, th {
     border: 1px solid #ddd; 
     text-align: left;
     width: 10%;
+}
+
+/*url_delay*/
+.site_information {
+    margin: 100px;
+}
+
+.test_button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.site_checks {
+    margin: 20px 100px;
 }

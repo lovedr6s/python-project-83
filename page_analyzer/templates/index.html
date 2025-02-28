@@ -10,19 +10,19 @@
             <a href="{{ url_for('index') }}">Анализатор страниц</a>
             <a href="{{ url_for('show_urls')}}">Сайты</a>
         </header>
+        <div class="flash">
+            {% with messages = get_flashed_messages() %} 
+            {% if messages %}
+            <p>{{ messages[0] }}</p>
+            {% endif %} 
+            {% endwith %}
+        </div>
         <div class="url_analyzer">
             <p>Введите адресс страницы, который хотите проанализировать</p>
             <form action="/urls" method="post">
                 <input type="text" name="url" value="{{ site_url }}" placeholder="https://weed.com">
                 <button type="submit">Проверить</button>
             </form>
-            {% with messages = get_flashed_messages(with_categories=true) %}
-                {% if messages %}
-                    {% for category, message in messages %}
-                        <div class="alert alert-{{ category }}">{{ message }}</div>
-                    {% endfor %}
-                {% endif %}
-            {% endwith %}
         </div>
         <footer>
             <p>Lovedr6s</p>

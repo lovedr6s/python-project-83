@@ -10,23 +10,62 @@
             <a href="{{ url_for('index') }}">Анализатор страниц</a>
             <a href="{{ url_for('show_urls')}}">Сайты</a>
         </header>
+        <div class="flash">
         {% with messages = get_flashed_messages() %} 
         {% if messages %}
-        <p>{{ messages }}</p>
+        <p>{{ messages[0] }}</p>
         {% endif %} 
         {% endwith %}
-        <form action="{{ url_for('check_url', id=id)}}" method="post">
-            <p>{{ url }}</p>
-            <button type="submit">Проверить</button>
-        </form>
+        </div>
+        <div class="site_information">
+            <h1>Сайт: {{ url }}</h1>
+            <table>
+                <tr>
+                    <th>ID</th>
+                    <th>{{ 1 }}</th>
+                </tr>
+                <tr>
+                    <th>Имя</th>
+                    <th>{{ url }}</th>
+                </tr>
+                <tr>
+                    <th>Дата создания</th>
+                    <th>{{ url }}</th>
+                </tr>
+            </table>
+        </div>
+        <div class="test_button">
+            <form action="{{ url_for('check_url', id=id)}}" method="post">
+                <button type="submit">Запустить проверку</button>
+            </form>
+        </div>
+        <div class="site_checks">
         {% if url_check_data %}
-        <ul>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Код ответа</th>
+                    <th>h1</th>
+                    <th>title</th>
+                    <th>description</th>
+                    <th>Дата создания</th>
+                </tr>
+            </thead>
             {% for url_check in url_check_data %}
-            <li>
-                {{ url_check }}
-            </li>
+            <tbody>
+                <tr>
+                    <td>{{ url_check[0] }}</td>
+                    <td>xd</td>
+                    <td>h1</td>
+                    <td>title</td>
+                    <td>description</td>
+                    <td>{{ url_check[6] }}</td>
+                </tr>
+            </tbody>
             {% endfor %}
-        </ul>
         {% endif %}
+        </table>
+        </div>
     </body>
 </html>
