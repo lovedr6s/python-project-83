@@ -1,6 +1,6 @@
 import psycopg2
 from page_analyzer.utils import DATABASE_URL
-from page_analyzer.site_request_data import get_site_data
+from page_analyzer.site_request_data import get_site_data, get_page_data
 import datetime
 
 
@@ -35,7 +35,7 @@ def insert_data_into_url_checks(data, site):
         if site[0] == 'error':
             curs.execute('INSERT INTO url_checks (url_id, status_code, h1, title, description, created_at) VALUES (%s, %s, %s)', (data, site[1], datetime.date.today()))
         else:
-            curs.execute('INSERT INTO url_checks (url_id, status_code, h1, title, description, created_at) VALUES (%s, %s, %s, %s, %s, %s)', (data, get_site_data(site)[1].status_code, get_site_data(site)[1].status_code, get_site_data(site)[1].status_code, get_site_data(site)[1].status_code,  datetime.date.today()))
+            curs.execute('INSERT INTO url_checks (url_id, status_code, h1, title, description, created_at) VALUES (%s, %s, %s, %s, %s, %s)', (data, get_site_data(site)[1].status_code, get_page_data(site)['h1'], get_page_data(site)['title'], get_page_data(site)['description'],  datetime.date.today()))
         conn.commit()
 
 

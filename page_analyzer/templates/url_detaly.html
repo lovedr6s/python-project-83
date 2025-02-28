@@ -18,19 +18,19 @@
         {% endwith %}
         </div>
         <div class="site_information">
-            <h1>Сайт: {{ url }}</h1>
+            <h1>Сайт: {{ url[1] }}</h1>
             <table>
                 <tr>
                     <th>ID</th>
-                    <th>{{ 1 }}</th>
+                    <th>{{ url[0] }}</th>
                 </tr>
                 <tr>
                     <th>Имя</th>
-                    <th>{{ url }}</th>
+                    <th>{{ url[1] }}</th>
                 </tr>
                 <tr>
                     <th>Дата создания</th>
-                    <th>{{ url }}</th>
+                    <th>{{ url[2] }}</th>
                 </tr>
             </table>
         </div>

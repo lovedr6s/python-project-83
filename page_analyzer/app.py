@@ -42,7 +42,7 @@ def url_detail(id):
     url_data = get_url_by_id(id)
     if url_data:
         url_check = get_data_from_url_checks_by_id(url_data[0])
-    return render_template('url_detaly.html', url_check_data=url_check, url=url_data[1], id=url_data[0])
+    return render_template('url_detaly.html', url_check_data=url_check, url=url_data, id=url_data[0])
 
 @app.get('/urls/<int:id>/details')
 def show_url(id):
