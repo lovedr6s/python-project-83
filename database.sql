@@ -1,7 +1,7 @@
 CREATE TABLE urls (
     id SERIAL PRIMARY KEY,
     name TEXT UNIQUE NOT NULL,
-    created_at TIMESTAMP DEFAULT current_timestamp);
+    created_at DATE);
 
 CREATE TABLE url_checks (
     id SERIAL PRIMARY KEY,
@@ -10,5 +10,5 @@ CREATE TABLE url_checks (
     h1 TEXT,
     title TEXT,
     description TEXT,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    created_at DATE
 );
