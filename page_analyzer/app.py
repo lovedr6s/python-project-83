@@ -48,10 +48,9 @@ def url_detail(id):
 def show_url(id):
     return redirect(url_for('url_detail', id=id))
 
-
 @app.post('/urls/<int:id>/checks')
 def check_url(id):
-    insert_data_into_url_checks(id)
+    insert_data_into_url_checks(id, get_name_from_urls_by_id(id))
     flash('Страница успешно проверенна')
     return redirect(url_for('show_url', id=id))
     

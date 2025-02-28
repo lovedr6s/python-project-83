@@ -1,7 +1,8 @@
 CREATE TABLE urls (
     id SERIAL PRIMARY KEY,
     name TEXT UNIQUE NOT NULL,
-    created_at DATE);
+    created_at DATE,
+    status_code INTEGER);
 
 CREATE TABLE url_checks (
     id SERIAL PRIMARY KEY,
