@@ -10,7 +10,7 @@ dependencies = [
     "flask>=3.1.0",
     "gunicorn",
     "psycopg2-binary",
-    "pytest>=8.3.4",
+    "pytest-playwright>=0.7.0",
     "python-dotenv>=1.0.1",
     "requests>=2.32.3",
     "validators>=0.34.0",
