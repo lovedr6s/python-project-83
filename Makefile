@@ -10,7 +10,7 @@ lint:
 format:
 	uv run black page_analyzer
 
-PORT ?= 800
+PORT ?= 8000
 start:
 	uv run gunicorn -w 5 -b 0.0.0.0:$(PORT) page_analyzer:app
 
