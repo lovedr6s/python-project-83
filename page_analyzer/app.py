@@ -90,10 +90,7 @@ def check_url(id):
         flash('Произошла ошибка при проверке')
         return redirect(url_for('show_url', id=id))
 
-    if not insert_data_into_url_checks(id, url):
-        flash('Произошла ошибка при проверке')
-        return redirect(url_for('show_url', id=id))
-
+    insert_data_into_url_checks(id, url)
     flash('Страница успешно проверена')
     return redirect(url_for('show_url', id=id))
 
