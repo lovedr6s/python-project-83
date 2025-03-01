@@ -67,9 +67,13 @@ def insert_data_into_url_checks(cursor, url_id, site):
     VALUES (%s, %s, %s, %s, %s, %s)
     """
 
-    values = (url_id, site_data[1].status_code, page_data['h1'],
-            page_data['title'], page_data['description'],
-            datetime.date.today())
+    values = (url_id,
+              site_data[1].status_code,
+              page_data['h1'],
+              page_data['title'], 
+              page_data['description'],
+              datetime.date.today())
+
     cursor.execute(query, values)
     cursor.connection.commit()
     return True

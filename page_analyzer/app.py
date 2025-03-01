@@ -7,7 +7,7 @@ from page_analyzer.database import (
     get_data_from_url_checks_by_id, get_name_from_urls_by_id
 )
 from page_analyzer.utils import SECRET_KEY
-from page_analyzer.site_request_data import get_page_data
+from page_analyzer.site_request_data import get_page_data, get_site_data
 from urllib.parse import urlparse
 import validators
 
@@ -75,12 +75,18 @@ def show_url(id):
 @app.post('/urls/<int:id>/checks')
 def check_url(id):
     url = get_name_from_urls_by_id(id)
+    site_data = get_site_data(url)
+    page_data = get_page_data(url)
 
     if not url:
         flash('URL не найден')
         return redirect(url_for('show_url', id=id))
 
-    if get_page_data(url) == 'error':
+    if site_data[0] == 'error':
+        flash('Произошла ошибка при проверке')
+        return redirect(url_for('show_url', id=id))
+
+    if page_data == 'error':
         flash('Произошла ошибка при проверке')
         return redirect(url_for('show_url', id=id))
 
