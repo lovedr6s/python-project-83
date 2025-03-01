@@ -31,7 +31,7 @@ def add_url():
     url = request.form.get('url')
 
     if not validate_url(url):
-        flash("Некорректный URL")
+        flash("Произошла ошибка при проверке")
         return render_template('index.html'), 422
 
     parsed_url = urlparse(url)
@@ -39,7 +39,7 @@ def add_url():
     existing_url = get_id_by_name(normalized_url)
 
     if existing_url:
-        flash("Такой url уже существует")
+        flash("Страница уже существует")
         return redirect(url_for('show_url', id=existing_url[0]))
 
     url_id = insert_data_into_urls(normalized_url)
@@ -74,7 +74,7 @@ def show_url(id):
 @app.post('/urls/<int:id>/checks')
 def check_url(id):
     insert_data_into_url_checks(id, get_name_from_urls_by_id(id))
-    flash('Страница успешно проверенна')
+    flash('Страница успешно проверена')
     return redirect(url_for('show_url', id=id))
 
 
