@@ -52,8 +52,8 @@
                     <th>Дата создания</th>
                 </tr>
             </thead>
-            {% for url_check in url_check_data %}
             <tbody>
+                {% for url_check in url_check_data %}
                 <tr>
                     <td>{{ url_check[0] }}</td>
                     <td>{{ url_check[2] }}</td>
@@ -62,8 +62,8 @@
                     <td>{{ url_check[5] }}</td>
                     <td>{{ url_check[6] }}</td>
                 </tr>
+                {% endfor %}
             </tbody>
-            {% endfor %}
         {% endif %}
         </table>
         </div>
