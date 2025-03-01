@@ -32,7 +32,7 @@ def add_url():
 
     if not validate_url(url):
         flash("Некорректный URL")
-        return redirect(url_for('index'))
+        return render_template('index.html'), 422
 
     parsed_url = urlparse(url)
     normalized_url = f"{parsed_url.scheme}://{parsed_url.netloc}"
@@ -43,7 +43,7 @@ def add_url():
         return redirect(url_for('show_url', id=existing_url[0]))
 
     url_id = insert_data_into_urls(normalized_url)
-    flash("URL добавлен")
+    flash("Страница успешно добавлена")
     return redirect(url_for("show_url", id=url_id))
 
 
