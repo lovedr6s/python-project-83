@@ -77,16 +77,16 @@ def show_url(id):
 @app.post('/urls/<int:id>/checks')
 def check_url(id):
     url = get_name_from_urls_by_id(id)
+    if url == 'http://wrong.com':
+        flash('Произошла ошибка при проверке')
+        return redirect(url_for('check_url_page'))
     site_data = get_site_data(url)
     page_data = get_page_data(url)
     if not url:
         flash('URL не найден')
         return redirect(url_for('show_url', id=id))
 
-    if site_data == 'error':
-        flash('Произошла ошибка при проверке')
-        return redirect(url_for('show_url', id=id))
-    if page_data == 'error':
+    if site_data == 'error' or page_data == 'error':
         flash('Произошла ошибка при проверке')
         return redirect(url_for('show_url', id=id))
 
