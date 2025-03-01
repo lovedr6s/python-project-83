@@ -8,7 +8,7 @@ def get_site_data(site):
         response.raise_for_status()
         return ('succses', response)
     except requests.exceptions.RequestException:
-        return ('error')
+        return 'error'
 
 
 def get_page_data(site):
