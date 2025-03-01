@@ -16,7 +16,8 @@ def get_site_data(site):
 def get_page_data(site):
     try:
         response = requests.get(site)
-        soup = BeautifulSoup(response.text)
+        response.raise_for_status()
+        soup = BeautifulSoup(response.text, features="html.parser")
         title = soup.title.text.strip() if soup.title else None
 
         meta_description = soup.find('meta', attrs={'name': 'description'})
@@ -27,5 +28,4 @@ def get_page_data(site):
                 'h1': h1,
                 'description': description}
     except requests.exceptions.RequestException:
-        print('lol')
         return 'error'

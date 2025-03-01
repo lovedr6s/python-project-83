@@ -74,10 +74,20 @@ def show_url(id):
 
 @app.post('/urls/<int:id>/checks')
 def check_url(id):
-    if get_page_data(get_name_from_urls_by_id(id)) == 'error':
+    url = get_name_from_urls_by_id(id)
+
+    if not url:
+        flash('URL не найден')
+        return redirect(url_for('show_url', id=id))
+
+    if get_page_data(url) == 'error':
         flash('Произошла ошибка при проверке')
-        return redirect(url_for("show_url", id=id))
-    insert_data_into_url_checks(id, get_name_from_urls_by_id(id))
+        return redirect(url_for('show_url', id=id))
+
+    if not insert_data_into_url_checks(id, url):
+        flash('Произошла ошибка при проверке')
+        return redirect(url_for('show_url', id=id))
+
     flash('Страница успешно проверена')
     return redirect(url_for('show_url', id=id))
 

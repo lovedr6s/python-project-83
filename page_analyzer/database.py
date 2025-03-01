@@ -33,7 +33,7 @@ def get_all_urls(cursor):
     ON url_checks.url_id = urls.id
     AND url_checks.id = ( SELECT MAX(id)
     FROM url_checks WHERE url_id = urls.id)
-    ORDER BY urls.id
+    ORDER BY urls.id DESC
     """
 
     cursor.execute(query)
@@ -53,18 +53,26 @@ def insert_data_into_urls(cursor, name):
 
 @with_connection
 def insert_data_into_url_checks(cursor, url_id, site):
+    site_data = get_site_data(site)
+    if site_data[0] == 'error':
+        return False
+
+    page_data = get_page_data(site)
+    if page_data == 'error':
+        return False
+
     query = """
     INSERT INTO url_checks
     (url_id, status_code, h1, title, description, created_at)
     VALUES (%s, %s, %s, %s, %s, %s)
     """
-    site_data = get_site_data(site)[1]
-    page_data = get_page_data(site)
-    values = (url_id, site_data.status_code, page_data['h1'],
+
+    values = (url_id, site_data[1].status_code, page_data['h1'],
             page_data['title'], page_data['description'],
             datetime.date.today())
     cursor.execute(query, values)
     cursor.connection.commit()
+    return True
 
 
 @with_connection
