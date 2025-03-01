@@ -7,6 +7,7 @@ from page_analyzer.database import (
     get_data_from_url_checks_by_id, get_name_from_urls_by_id
 )
 from page_analyzer.utils import SECRET_KEY
+from page_analyzer.site_request_data import get_page_data
 from urllib.parse import urlparse
 import validators
 
@@ -31,7 +32,7 @@ def add_url():
     url = request.form.get('url')
 
     if not validate_url(url):
-        flash("Произошла ошибка при проверке")
+        flash("Некорректный URL")
         return render_template('index.html'), 422
 
     parsed_url = urlparse(url)
@@ -54,16 +55,16 @@ def show_urls():
 
 @app.get('/urls/<int:id>')
 def url_detail(id):
-    url_data = get_url_by_id(id)
+    url_name = get_url_by_id(id)
 
-    if not url_data:
+    if not url_name:
         flash('URL не найден')
         return redirect(url_for('index'))
 
-    url_check = get_data_from_url_checks_by_id(url_data[0])
+    url_check = get_data_from_url_checks_by_id(id)
     return render_template('url_detaly.html',
                            url_check_data=url_check,
-                           url=url_data, id=url_data[0])
+                           url=url_name, id=id)
 
 
 @app.get('/urls/<int:id>/details')
@@ -73,6 +74,9 @@ def show_url(id):
 
 @app.post('/urls/<int:id>/checks')
 def check_url(id):
+    if get_page_data(get_name_from_urls_by_id(id)) == 'error':
+        flash('Произошла ошибка при проверке')
+        return redirect(url_for("show_url", id=id))
     insert_data_into_url_checks(id, get_name_from_urls_by_id(id))
     flash('Страница успешно проверена')
     return redirect(url_for('show_url', id=id))

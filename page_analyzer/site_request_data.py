@@ -27,4 +27,5 @@ def get_page_data(site):
                 'h1': h1,
                 'description': description}
     except requests.exceptions.RequestException:
-        return {'title': None, 'h1': None, 'description': None}
+        print('lol')
+        return 'error'

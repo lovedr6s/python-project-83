@@ -58,15 +58,11 @@ def insert_data_into_url_checks(cursor, url_id, site):
     (url_id, status_code, h1, title, description, created_at)
     VALUES (%s, %s, %s, %s, %s, %s)
     """
-
-    if site[0] == 'error':
-        values = (url_id, site[1], None, None, None, datetime.date.today())
-    else:
-        site_data = get_site_data(site)[1]
-        page_data = get_page_data(site)
-        values = (url_id, site_data.status_code, page_data['h1'],
-                  page_data['title'], page_data['description'],
-                  datetime.date.today())
+    site_data = get_site_data(site)[1]
+    page_data = get_page_data(site)
+    values = (url_id, site_data.status_code, page_data['h1'],
+            page_data['title'], page_data['description'],
+            datetime.date.today())
     cursor.execute(query, values)
     cursor.connection.commit()
 
