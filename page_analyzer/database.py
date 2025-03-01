@@ -54,7 +54,7 @@ def insert_data_into_urls(cursor, name):
 @with_connection
 def insert_data_into_url_checks(cursor, url_id, site):
     site_data = get_site_data(site)
-    if site_data[0] == 'error':
+    if site_data == 'error':
         return False
 
     page_data = get_page_data(site)
@@ -68,7 +68,7 @@ def insert_data_into_url_checks(cursor, url_id, site):
     """
 
     values = (url_id,
-              site_data[1].status_code,
+              site_data.status_code,
               page_data['h1'],
               page_data['title'], 
               page_data['description'],

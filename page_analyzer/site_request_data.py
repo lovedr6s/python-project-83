@@ -6,7 +6,7 @@ def get_site_data(site):
     try:
         response = requests.get(site)
         response.raise_for_status()
-        return ('succses', response)
+        return response
     except requests.exceptions.RequestException:
         return 'error'
 

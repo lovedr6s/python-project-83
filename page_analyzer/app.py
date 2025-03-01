@@ -82,7 +82,7 @@ def check_url(id):
         flash('URL не найден')
         return redirect(url_for('show_url', id=id))
 
-    if site_data[0] == 'error':
+    if site_data == 'error':
         flash('Произошла ошибка при проверке')
         return redirect(url_for('show_url', id=id))
 
