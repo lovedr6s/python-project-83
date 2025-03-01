@@ -5,6 +5,7 @@ from bs4 import BeautifulSoup
 def get_site_data(site):
     try:
         response = requests.get(site)
+        response.raise_for_status()
         if response.status_code != 200:
             return ('error', response)
         return ('succses', response)
