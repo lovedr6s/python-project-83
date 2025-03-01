@@ -59,14 +59,14 @@ footer p {
     flex: 1;
 }
 
-button {
+.button {
     border: none;
     background-color: aqua;
     transition: 0.3s;
     padding: 10px;
 }
 
-button:hover {
+.button:hover {
     box-shadow: 0 0 10px rgba(255, 0, 0, 0.7);
 }
 
