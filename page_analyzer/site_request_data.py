@@ -15,7 +15,7 @@ def get_page_data(site):
     try:
         response = requests.get(site)
         response.raise_for_status()
-        soup = BeautifulSoup(response.text, features="html.parser")
+        soup = BeautifulSoup(response.text, 'lxml')
         title = soup.title.text.strip() if soup.title else ''
 
         meta_description = soup.find('meta', attrs={'name': 'description'})
