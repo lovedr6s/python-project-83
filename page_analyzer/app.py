@@ -77,7 +77,6 @@ def check_url(id):
     url = get_name_from_urls_by_id(id)
     site_data = get_site_data(url)
     page_data = get_page_data(url)
-
     if not url:
         flash('URL не найден')
         return redirect(url_for('show_url', id=id))
@@ -85,7 +84,6 @@ def check_url(id):
     if site_data == 'error':
         flash('Произошла ошибка при проверке')
         return redirect(url_for('show_url', id=id))
-
     if page_data == 'error':
         flash('Произошла ошибка при проверке')
         return redirect(url_for('show_url', id=id))

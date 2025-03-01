@@ -54,13 +54,7 @@ def insert_data_into_urls(cursor, name):
 @with_connection
 def insert_data_into_url_checks(cursor, url_id, site):
     site_data = get_site_data(site)
-    if site_data == 'error':
-        return False
-
     page_data = get_page_data(site)
-    if page_data == 'error':
-        return False
-
     query = """
     INSERT INTO url_checks
     (url_id, status_code, h1, title, description, created_at)

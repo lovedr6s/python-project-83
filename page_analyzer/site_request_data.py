@@ -16,12 +16,11 @@ def get_page_data(site):
         response = requests.get(site)
         response.raise_for_status()
         soup = BeautifulSoup(response.text, features="html.parser")
-        title = soup.title.text.strip() if soup.title else None
+        title = soup.title.text.strip() if soup.title else ''
 
         meta_description = soup.find('meta', attrs={'name': 'description'})
-        description = meta_description['content'] if meta_description else None
-
-        h1 = soup.find('h1').text.strip() if soup.find('h1') else None
+        description = meta_description['content'] if meta_description else ''
+        h1 = soup.find('h1').text.strip() if soup.find('h1') else ''
         return {'title': title,
                 'h1': h1,
                 'description': description}
