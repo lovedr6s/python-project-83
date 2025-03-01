@@ -62,6 +62,8 @@ def url_detail(id):
         return redirect(url_for('index'))
 
     url_check = get_data_from_url_checks_by_id(id)
+    if not url_check:
+        return render_template('url_detaly.html', url=url_name, id=id)
     return render_template('url_detaly.html',
                            url_check_data=url_check,
                            url=url_name, id=id)
