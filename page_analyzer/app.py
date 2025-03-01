@@ -79,7 +79,7 @@ def check_url(id):
     url = get_name_from_urls_by_id(id)
     if url == 'http://wrong.com':
         flash('Произошла ошибка при проверке')
-        return redirect(url_for('check_url_page'))
+        return redirect(url_for('show_url', id=id))
     site_data = get_site_data(url)
     page_data = get_page_data(url)
     if not url:
