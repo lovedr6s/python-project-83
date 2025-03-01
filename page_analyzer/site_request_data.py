@@ -6,12 +6,9 @@ def get_site_data(site):
     try:
         response = requests.get(site)
         response.raise_for_status()
-        if response.status_code != 200:
-            return ('error', response)
         return ('succses', response)
     except requests.exceptions.RequestException:
-        return ('error', type('FakeResponse', (object,),
-                              {'status_code': 400})())
+        return ('error')
 
 
 def get_page_data(site):
