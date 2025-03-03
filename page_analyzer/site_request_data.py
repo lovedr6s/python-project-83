@@ -1,6 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 
+
 def check_site_availability(site):
     try:
         response = requests.get(site)
@@ -8,6 +9,7 @@ def check_site_availability(site):
         return response
     except requests.exceptions.RequestException:
         return False
+
 
 def get_site_data(site):
     response = check_site_availability(site)
