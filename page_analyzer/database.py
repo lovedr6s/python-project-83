@@ -1,6 +1,8 @@
 import psycopg2
 from page_analyzer.utils import DATABASE_URL
-from page_analyzer.site_request_data import get_site_data, get_page_data, check_site_availability
+from page_analyzer.site_request_data import (
+    get_site_data, get_page_data, check_site_availability
+    )
 import datetime
 
 
@@ -68,7 +70,7 @@ def insert_data_into_url_checks(cursor, url_id, site):
     values = (url_id,
               site_data.status_code,
               page_data['h1'],
-              page_data['title'], 
+              page_data['title'],
               page_data['description'],
               datetime.date.today())
 

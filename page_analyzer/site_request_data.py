@@ -19,7 +19,9 @@ def get_site_data(site):
 def get_page_data(site):
     if not check_site_availability(site):
         return 'error'
-    soup = BeautifulSoup(check_site_availability(site).text, features="html.parser")
+    soup = BeautifulSoup(
+        check_site_availability(site).text, features="html.parser"
+        )
     title = soup.title.text.strip() if soup.title else ''
 
     meta_description = soup.find('meta', attrs={'name': 'description'})
