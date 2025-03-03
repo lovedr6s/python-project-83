@@ -4,6 +4,7 @@ curl -LsSf https://astral.sh/uv/install.sh | sh
 
 source $HOME/.local/bin/env
 export PATH="/opt/render/.local/bin:$PATH"
+source .venv/bin/activate
 
 make install  
 
