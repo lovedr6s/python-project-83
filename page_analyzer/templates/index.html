@@ -1,31 +1,10 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Анализатор страниц</title>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
-    </head>
-    <body>
-        <header>
-            <a href="{{ url_for('index') }}">Анализатор страниц</a>
-            <a href="{{ url_for('show_urls')}}">Сайты</a>
-        </header>
-        <div class="flash">
-            {% with messages = get_flashed_messages() %} 
-            {% if messages %}
-            <p>{{ messages[0] }}</p>
-            {% endif %} 
-            {% endwith %}
-        </div>
-        <div class="url_analyzer">
-            <p>Введите адресс страницы, который хотите проанализировать</p>
-            <form action="/urls" method="post">
-                <input type="text" name="url" value="{{ site_url }}" placeholder="https://weed.com">
-                <input class='button' type="submit" value="Проверить">
-            </form>
-        </div>
-        <footer>
-            <p>Lovedr6s</p>
-        </footer>
-    </body>
-</html>
+{% extends 'base.html' %}
+{% block content %}
+<div class="url_analyzer">
+    <p>Введите адресс страницы, который хотите проанализировать</p>
+    <form action="/urls" method="post">
+        <input type="text" name="url" value="{{ site_url }}" placeholder="https://weed.com">
+        <input class='button' type="submit" value="Проверить">
+    </form>
+</div>
+{% endblock %}
