@@ -40,7 +40,6 @@
             </form>
         </div>
         <div class="site_checks">
-        {% if url_check_data %}
         <table data-test="checks">
             <thead>
                 <tr>
@@ -52,6 +51,7 @@
                     <th>Дата создания</th>
                 </tr>
             </thead>
+            {% if url_check_data %}
             <tbody>
                 {% for url_check in url_check_data %}
                 <tr>
