@@ -1,7 +1,7 @@
 import psycopg2
 from page_analyzer.utils import DATABASE_URL
 from page_analyzer.site_request_data import (
-    get_site_data, get_page_data, check_site_availability
+    get_site_data, get_page_data
     )
 import datetime
 

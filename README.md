@@ -16,6 +16,3 @@
 * requests
 * validators
 
-## To run the program use
-'''make build
-make render-start'''
