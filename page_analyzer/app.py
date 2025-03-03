@@ -86,9 +86,7 @@ def check_url(id):
     if site_data == 'error' or page_data == 'error':
         flash('Произошла ошибка при проверке')
         return redirect(url_for('show_url', id=id))
-    print(get_data_from_url_checks_by_id(id))
     insert_data_into_url_checks(id, url)
-    print(get_data_from_url_checks_by_id(id))
     flash('Страница успешно проверена')
     return redirect(url_for('show_url', id=id))
 

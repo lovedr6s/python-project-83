@@ -55,8 +55,6 @@ def insert_data_into_urls(cursor, name):
 
 @with_connection
 def insert_data_into_url_checks(cursor, url_id, site):
-    if not check_site_availability(site):
-        return 'error'
     site_data = get_site_data(site)
     page_data = get_page_data(site)
     if site_data.status_code in [404, 500]:
