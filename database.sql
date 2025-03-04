@@ -1,10 +1,10 @@
-CREATE TABLE urls (
+CREATE TABLE IF NOT EXISTS urls (
     id SERIAL PRIMARY KEY,
     name TEXT UNIQUE NOT NULL,
     created_at DATE,
     status_code INTEGER);
 
-CREATE TABLE url_checks (
+CREATE TABLE IF NOT EXISTS url_checks (
     id SERIAL PRIMARY KEY,
     url_id INTEGER,
     status_code INTEGER,

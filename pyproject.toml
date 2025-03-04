@@ -3,12 +3,12 @@ name = "hexlet-code"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
-requires-python = ">=3.13"
+requires-python = ">=3.10"
 dependencies = [
     "bs4>=0.0.2",
     "flake8>=7.1.2",
     "flask>=3.1.0",
-    "gunicorn",
+    "gunicorn>=23.0.0",
     "psycopg2-binary",
     "pytest-playwright>=0.7.0",
     "python-dotenv>=1.0.1",
