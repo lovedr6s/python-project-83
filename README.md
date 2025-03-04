@@ -36,7 +36,7 @@ Before running make .env file with:
 - 'DATABASE_URL': your link to your database
 ### Example
 SECRET_KEY = 'meow'
-DATABASE_URL = 'sql://bla'
+DATABASE_URL = 'sql://oof'
 
 ## Install dependies
 make install
