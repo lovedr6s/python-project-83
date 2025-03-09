@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
 {% block content %}
-<div class="sites">
-    <h1>Сайты</h1>
+<div class="contaienr mt-4">
+    <h1 class="mb-4">Сайты</h1>
     {% if urls %}
-    <table data-test="urls">
-        <thead>
+    <table class="table table-striped" data-test="urls">
+        <thead class="table-dark">
             <tr>
                 <th>ID</th>
                 <th>Имя</th>
@@ -16,7 +16,7 @@
         <tbody>
             <tr>
                 <td>{{ url[0] }}</td>
-                <td><a href="{{ url_for('show_url', id=url[0]) }}">{{ url[1] }}</a></td>
+                <td><a href="{{ url_for('redirect_to_url_details', id=url[0]) }}">{{ url[1] }}</a></td>
                 <td>{{ url[2] }}</td>
                 <td>{{ url[3] }}</td>
             </tr>

@@ -14,19 +14,19 @@ def with_connection(func):
 
 
 @with_connection
-def get_url_by_id(cursor, id):
+def fetch_url_by_id(cursor, id):
     cursor.execute("SELECT * FROM urls WHERE id = %s", (id, ))
     return cursor.fetchone()
 
 
 @with_connection
-def get_id_by_name(cursor, name):
+def fetch_id_by_name(cursor, name):
     cursor.execute('SELECT id FROM urls WHERE name = %s', (name,))
     return cursor.fetchone()
 
 
 @with_connection
-def get_all_urls(cursor):
+def fetch_all_urls(cursor):
     query = """
     SELECT DISTINCT ON (urls.id) urls.id, urls.name,
     url_checks.created_at, url_checks.status_code
@@ -43,7 +43,7 @@ def get_all_urls(cursor):
 
 
 @with_connection
-def insert_data_into_urls(cursor, name):
+def add_urls_to_db(cursor, name):
     query = '''
     INSERT INTO urls (name, created_at)
     VALUES (%s, %s) RETURNING id
@@ -54,7 +54,7 @@ def insert_data_into_urls(cursor, name):
 
 
 @with_connection
-def insert_data_into_url_checks(cursor, url_id, site):
+def add_url_check(cursor, url_id, site):
     site_data = get_site_data(site)
     page_data = get_page_data(site)
     if site_data.status_code in [404, 500]:
@@ -78,12 +78,12 @@ def insert_data_into_url_checks(cursor, url_id, site):
 
 
 @with_connection
-def get_data_from_url_checks_by_id(cursor, url_id):
+def fetch_url_checks_by_id(cursor, url_id):
     cursor.execute('SELECT * FROM url_checks WHERE url_id = %s', (url_id, ))
     return cursor.fetchall()
 
 
 @with_connection
-def get_name_from_urls_by_id(cursor, url_id):
+def fetch_url_name_by_id(cursor, url_id):
     cursor.execute("SELECT name FROM urls WHERE id = %s", (url_id, ))
     return cursor.fetchone()[0]

@@ -1,8 +1,8 @@
 {% extends 'base.html' %}
 {% block content %}
-<div class="site_information">
-    <h1>Сайт: {{ url[1] }}</h1>
-    <table data-test="url">
+<div class="container mt-4">
+    <h1 class="mb-4">Сайт: {{ url[1] }}</h1>
+    <table class="table table-bordered" data-test="url">
         <tr>
             <th>ID</th>
             <th>{{ url[0] }}</th>
@@ -16,38 +16,35 @@
             <th>{{ url[2] }}</th>
          </tr>
      </table>
-</div>
- <div class="test_button">
-    <form action="{{ url_for('check_url', id=id)}}" method="post">
-        <input class='button' type="submit" value="Запустить проверку">
-    </form>
-</div>
-<div class="site_checks">
-    <table data-test="checks">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Код ответа</th>
-                <th>h1</th>
-                <th>title</th> 
-                <th>description</th>
-                <th>Дата создания</th>
-            </tr>
-        </thead>
-        {% if url_check_data %}
-        <tbody>
-            {% for url_check in url_check_data %}
-            <tr>
-                <td>{{ url_check[0] }}</td>
-                <td>{{ url_check[2] }}</td>
-                <td>{{ url_check[3] }}</td>
-                <td>{{ url_check[4] }}</td>
-                <td>{{ url_check[5] }}</td>
-                <td>{{ url_check[6] }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    {% endif %}
-    </table>
+<form action="{{ url_for('perfom_check_url', id=id)}}" method="post">
+    <input class='btn btn-primary' type="submit" value="Запустить проверку">
+</form>
+<h2 class="mt-4">Проверки</h2>
+<table class="table table-striped" data-test="checks">
+    <thead class="table-dark">
+        <tr>
+            <th>ID</th>
+            <th>Код ответа</th>
+            <th>h1</th>
+            <th>title</th> 
+            <th>description</th>
+            <th>Дата создания</th>
+        </tr>
+    </thead>
+    {% if url_check_data %}
+    <tbody>
+        {% for url_check in url_check_data %}
+        <tr>
+            <td>{{ url_check[0] }}</td>
+            <td>{{ url_check[2] }}</td>
+            <td>{{ url_check[3] }}</td>
+            <td>{{ url_check[4] }}</td>
+            <td>{{ url_check[5] }}</td>
+            <td>{{ url_check[6] }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+{% endif %}
+</table>
 </div>
 {% endblock %}
