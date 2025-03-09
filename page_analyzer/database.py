@@ -1,7 +1,7 @@
 import psycopg2
 from page_analyzer.utils import DATABASE_URL
 from page_analyzer.site_request_data import (
-    get_site_data, get_page_data
+    fetch_site_response, extract_page_info
     )
 import datetime
 
@@ -55,8 +55,8 @@ def add_urls_to_db(cursor, name):
 
 @with_connection
 def add_url_check(cursor, url_id, site):
-    site_data = get_site_data(site)
-    page_data = get_page_data(site)
+    site_data = fetch_site_response(site)
+    page_data = extract_page_info(site)
     if site_data.status_code in [404, 500]:
         return False
     query = """

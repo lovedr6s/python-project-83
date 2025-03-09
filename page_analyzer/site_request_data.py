@@ -2,7 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 
 
-def check_site_availability(site):
+def is_site_available(site):
     try:
         response = requests.get(site)
         response.raise_for_status()
@@ -11,20 +11,22 @@ def check_site_availability(site):
         return False
 
 
-def get_site_data(site):
-    response = check_site_availability(site)
+def fetch_site_response(site):
+    response = is_site_available(site)
     return response
 
 
-def get_page_data(site):
-    if not check_site_availability(site):
+def extract_page_info(site):
+    if not is_site_available(site):
         return 'error'
     soup = BeautifulSoup(
-        check_site_availability(site).text, features="html.parser"
+        is_site_available(site).text, features="html.parser"
         )
 
     meta_description = soup.find('meta', attrs={'name': 'description'})
 
     return {'title': soup.title.text.strip() if soup.title else '',
             'h1': soup.find('h1').text.strip() if soup.find('h1') else '',
-            'description': meta_description['content'] if meta_description else ''}
+            'description': meta_description['content'] if meta_description
+            else ''
+            }

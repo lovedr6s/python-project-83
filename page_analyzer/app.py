@@ -7,7 +7,9 @@ from page_analyzer.database import (
     fetch_url_checks_by_id, fetch_url_name_by_id
 )
 from page_analyzer.utils import SECRET_KEY
-from page_analyzer.site_request_data import get_page_data, get_site_data
+from page_analyzer.site_request_data import (
+    extract_page_info, fetch_site_response
+)
 from urllib.parse import urlparse
 import validators
 
@@ -77,8 +79,8 @@ def redirect_to_url_details(id):
 @app.post('/urls/<int:id>/checks')
 def perfom_check_url(id):
     url = fetch_url_name_by_id(id)
-    site_data = get_site_data(url)
-    page_data = get_page_data(url)
+    site_data = fetch_site_response(url)
+    page_data = extract_page_info(url)
     if not url:
         flash('URL не найден')
         return redirect(url_for('redirect_to_url_details', id=id))
