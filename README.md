@@ -24,7 +24,7 @@
 * requests
 * validators
 
-# Installation and Running
+## Installation and Running
 Use the `Makefile` to install and run the program
 ```bash
 git clone https://github.com/lovedr6s/python-project-83.git
@@ -48,3 +48,5 @@ make dev
 make start
 ```
 
+## Program asciinema
+[![asciicast](https://asciinema.org/a/F5SyXaq0SW2NavdzGMSEbUSQZ.svg)](https://asciinema.org/a/F5SyXaq0SW2NavdzGMSEbUSQZ)
