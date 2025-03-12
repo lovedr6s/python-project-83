@@ -11,6 +11,7 @@
 * Display check results on the user interface
 
 ## Demo
+![](https://github.com/lovedr6s/python-project-83/blob/main/.github/workflows/2025-03-12%2010.08.13.gif)
 ### You can view application on the website: [Page Analyzer](https://python-project-83-1xm8.onrender.com)
 
 ## Libraries:
@@ -47,6 +48,3 @@ make dev
 ## Run the production server
 make start
 ```
-
-## Program asciinema
-[![asciicast](https://asciinema.org/a/F5SyXaq0SW2NavdzGMSEbUSQZ.svg)](https://asciinema.org/a/F5SyXaq0SW2NavdzGMSEbUSQZ)
